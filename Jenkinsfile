@@ -23,15 +23,16 @@ pipeline {
       }
     }
 
-    stage('Push Image') {
+    stage('Deploy Image') {
       steps{
-        script {
-          docker.withRegistry( "" ) {
+         script {
+            docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
+            }    
           }
         }
       }
-    }
+
 
     stage('Deploy App') {
       steps {
